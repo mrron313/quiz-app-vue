@@ -15,13 +15,25 @@ const mutations = {
 
 const actions = {
     async login({commit}) {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        try {
-          const result = await firebase.auth().signInWithPopup(provider);
-          console.log(result);
-        } catch(error) {
-          console.log(error);
-        }
+        firebase.auth().signInWithEmailAndPassword("arifulislam@bs-23.net", "Bs23Bs23Arif313").then(
+          function (user){
+            alert("user signed in");
+          },
+          function (err){
+            alert('Opps' + err.message);
+          }
+        );
+      },
+
+      async signup({commit}) {
+        firebase.auth().createUserWithEmailAndPassword("arifulislam@bs-23.net", "Bs23Bs23Arif313").then(
+          function (user){
+            alert("user created");
+          },
+          function (err){
+            alert(err.message);
+          }
+        );
       }
 }
 

@@ -3,6 +3,7 @@
     <v-toolbar app>
       <v-toolbar-title>Quiz App</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn @click="signup">Sign Up</v-btn>
       <v-btn @click="login">Login</v-btn>
     </v-toolbar>
     <v-content>
@@ -21,6 +22,7 @@ export default {
   name: 'app',
   methods: {
     ...mapActions('user', {
+      signup: 'signup',
       login: 'login'
     })
   }
