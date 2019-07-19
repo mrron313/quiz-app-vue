@@ -26,15 +26,15 @@ import {mapActions} from 'vuex'
 
 export default {
   name: 'app',
-  data:{
-    return(){
-      loggedIn: false
+  data() {
+    return{
+      loggedIn: false,
     }
   },
 
   methods:{
     ...mapActions('user', {
-        logout: 'logout'
+        logout: 'logout',
     }),
 
     submitLogout(){
@@ -46,7 +46,8 @@ export default {
 
     loginCheck(){
       this.loggedIn = this.$store.state.user.loggedIn
-    }
+    },
+
   },
 
   created(){

@@ -1,4 +1,3 @@
-
 import firebase from '@/firebase'
 import db from '@/db'
 
@@ -13,7 +12,7 @@ const getters = {
 
 const mutations = {
   authenticatedUser (state) {
-    var user = firebase.auth().currentUser
+    const user = firebase.auth().currentUser
 
     if (user != null) {
       state.user.u_id = user.uid

@@ -7,7 +7,7 @@ Technology: Vue, Vuex, Firebase, Quiz Api
 1. User authentication with firebase / Phone number OTP verification
 2. Quiz API integration
 3. See his score
-4. One user can play once a quiz
+4. One user can play multiple times
 
 
 Number of Page: 1. Login Page, 2. Sign Up Page 3. Home Page/Quiz Page

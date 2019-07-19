@@ -13,8 +13,10 @@ Vue.use(Vuetify)
 
 /** Components */
 import Question from '@/components/Question'
-Vue.component('question', Question)
+import ScoreDatatable from '@/components/ScoreDatatable'
 
+Vue.component('question', Question)
+Vue.component('scores-datatable', ScoreDatatable)
 
 Vue.config.productionTip = false
 

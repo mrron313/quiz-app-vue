@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-jumbotron v-if="introStage">
+        <v-responsive v-if="introStage">
             <v-container fill-height>
                 <v-layout align-center>
 
@@ -8,12 +8,12 @@
                         <h3 class="display-3">{{ title }}</h3>
                         <span class="subheading">Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
                         <v-divider class="my-3"></v-divider>  
-                        <v-btn color="info" @click="startQuiz">START!</v-btn>
+                        <v-btn class="button" color="info" @click="startQuiz">START!</v-btn>
                     </v-flex>
 
                 </v-layout>
             </v-container>
-        </v-jumbotron>
+        </v-responsive>
 
         <v-container>
             <v-layout align-center>
@@ -34,7 +34,11 @@
                         You got {{correct}} right out of {{questions.length}} questions. Your percentage is {{perc}}%.
                     </v-alert>
 
-                    <v-btn to="/">Back to home</v-btn>
+                    <v-btn class="button" color="primary" @click="pageRefresh">Back to home</v-btn>
+                </v-flex>
+
+                <v-flex v-if="introStage">
+                    <scores-datatable />
                 </v-flex>
 
             </v-layout>
@@ -59,7 +63,7 @@ export default {
             currentQuestion:0,
             answers:[],
             correct:0,
-            perc:null
+            perc:null,
         }
     },
   
@@ -71,6 +75,7 @@ export default {
                 this.questions = res.questions;
                 this.introStage = true;
             })
+
     },
 
     methods:{
@@ -112,8 +117,20 @@ export default {
             })
 
             console.log(this.correct+' '+this.perc);
-        }
+        },
+
+        pageRefresh(){
+            location.reload()
+        },
     }
 }
 
 </script>
+
+<style scoped>
+
+.button{
+  margin-left: 0px  
+}
+
+</style>
