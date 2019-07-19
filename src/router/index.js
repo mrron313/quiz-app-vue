@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { homedir } from 'os';
-import Home from '@/components/Home';
-import Login from '@/components/Login';
+import { homedir } from 'os'
+import Home from '@/components/Home'
+import About from '@/components/About'
+import Login from '@/components/Login'
+import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'Home',
       component: Home,
       meta: {
@@ -17,9 +19,28 @@ export default new Router({
       }
     },
     {
+      path: '/about',
+      name: 'About',
+      component: About,
+      meta: {
+        requiresAuth: true
+      }      
+    },
+    {
       path: '/login',
       name: 'Login',
       component: Login
     }
-  ]
+  ],
 })
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = store.state.user.loggedIn
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+
+  if(requiresAuth && !loggedIn) next('login')
+  else if(!requiresAuth && loggedIn) next(['home', 'about'])
+  else next()
+})
+
+export default router
