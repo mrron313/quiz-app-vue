@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn v-if="loggedIn==true" flat to="/home">Home</v-btn>
+        <v-btn v-if="loggedIn==true" flat to="/">Home</v-btn>
         <v-btn v-if="loggedIn==true" flat to="/about">About</v-btn>
         <v-btn v-if="loggedIn==true" flat @click="submitLogout">Logout</v-btn>
         <v-btn v-if="loggedIn==false" flat>Login</v-btn>
@@ -23,7 +23,6 @@
 
 <script>
 import {mapActions} from 'vuex'
-import { setTimeout } from 'timers';
 
 export default {
   name: 'app',

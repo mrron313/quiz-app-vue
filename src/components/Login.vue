@@ -45,7 +45,7 @@ export default {
             })
             .then(response => {
                 if( this.$store.state.user.loggedIn ){
-                    this.$router.replace('home')   
+                    this.$router.replace('/')   
                     location.reload()       
                 }
             })

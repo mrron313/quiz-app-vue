@@ -11,7 +11,7 @@ Vue.use(Router)
 const router = new Router({
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
       component: Home,
       meta: {
@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
   if(requiresAuth && !loggedIn) next('login')
-  else if(!requiresAuth && loggedIn) next(['home', 'about'])
+  else if(!requiresAuth && loggedIn) next(['/', 'about'])
   else next()
 })
 

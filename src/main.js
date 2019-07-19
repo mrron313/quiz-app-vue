@@ -11,6 +11,11 @@ import store from './store'
 import('vuetify/dist/vuetify.min.css');
 Vue.use(Vuetify)
 
+/** Components */
+import Question from '@/components/Question'
+Vue.component('question', Question)
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

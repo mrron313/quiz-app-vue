@@ -1,6 +1,6 @@
 
 import firebase from '@/firebase'
-import { longStackSupport } from 'q';
+import db from '@/db'
 
 const state = {
     user: {},
@@ -16,6 +16,7 @@ const mutations = {
     var user = firebase.auth().currentUser
 
     if (user != null) {
+      state.user.u_id = user.uid
       state.user.email = user.email
       state.loggedIn = true
     }
@@ -24,7 +25,8 @@ const mutations = {
   logoutUser(state){
     state.user = {}
     state.loggedIn = false
-  }
+  },
+
 }
 
 const actions = {
@@ -58,6 +60,19 @@ const actions = {
             return err;
           }
         );
+      },
+
+      async saveScore({commit}, results){
+        await db.collection("quizes").add({
+          u_id: results.u_id, 
+          score: results.score,
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
       }
 }
 
