@@ -20,6 +20,7 @@
         class="elevation-1"
         >
             <template v-slot:items="props">
+                <td class="text-xs-left">{{ props.item.u_email }}</td>
                 <td class="text-xs-left">{{ props.item.u_id }}</td>
                 <td class="text-xs-left">{{ props.item.score }}</td>
                 <td class="text-xs-left">{{ props.item.created | createdtoDate }}</td>
@@ -37,6 +38,12 @@ export default {
         return {
             search: '',
             headers: [
+                {
+                    text: 'User Email',
+                    align: 'left',
+                    sortable: false,
+                    value: 'u_email'
+                },
                 {
                     text: 'User ID',
                     align: 'left',

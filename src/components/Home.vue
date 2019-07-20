@@ -110,6 +110,7 @@ export default {
             
             this.saveScore({
                 u_id: this.$store.state.user.user.u_id,
+                u_email: this.$store.state.user.user.u_email,
                 score: this.correct
             })
             .then(response => {

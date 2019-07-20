@@ -16,7 +16,7 @@ const mutations = {
 
     if (user != null) {
       state.user.u_id = user.uid
-      state.user.email = user.email
+      state.user.u_email = user.email
       state.loggedIn = true
     }
   },
