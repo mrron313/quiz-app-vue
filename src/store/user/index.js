@@ -50,13 +50,13 @@ const actions = {
         });
       },
 
-      async signup({commit}, credientials) {
+      async resgister({commit}, credientials) {
         await firebase.auth().createUserWithEmailAndPassword(credientials.email, credientials.password).then(
           function (user){
-            return user
+            commit('authenticatedUser')
           },
           function (err){
-            return err;
+            console.log(err);
           }
         );
       },

@@ -4,6 +4,7 @@ import { homedir } from 'os'
 import Home from '@/components/Home'
 import About from '@/components/About'
 import Login from '@/components/Login'
+import Register from '@/components/Register'
 import store from '@/store'
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ],
 })

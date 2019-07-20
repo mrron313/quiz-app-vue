@@ -8,7 +8,8 @@
         <v-btn v-if="loggedIn==true" flat to="/">Home</v-btn>
         <v-btn v-if="loggedIn==true" flat to="/about">About</v-btn>
         <v-btn v-if="loggedIn==true" flat @click="submitLogout">Logout</v-btn>
-        <v-btn v-if="loggedIn==false" flat>Login</v-btn>
+        <v-btn v-if="loggedIn==false" to="/login" flat>Login</v-btn>
+        <v-btn v-if="loggedIn==false" to="/register" flat>Register</v-btn>
       </v-toolbar-items>
 
     </v-toolbar>

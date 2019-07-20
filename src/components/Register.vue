@@ -13,7 +13,7 @@
                 label="Password"
                 required
             ></v-text-field>  
-            <v-btn @click="submitLogin">Login</v-btn>
+            <v-btn @click="submitRegister">Register</v-btn>
             
         </v-layout>   
     </div>
@@ -23,7 +23,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-    name: 'login',
+    name: 'register',
     data() {
         return{
             password: '',
@@ -32,11 +32,11 @@ export default {
     },  
     methods: {
         ...mapActions('user', {
-            login: 'login'
+            resgister: 'resgister'
         }),
 
-        submitLogin(){
-            this.login({
+        submitRegister(){
+            this.resgister({
                 email: this.email,
                 password: this.password
             })
