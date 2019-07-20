@@ -2,7 +2,6 @@
 
     <div>
         <h2>Leader Board</h2>
-        <br>
 
         <v-text-field
           v-model="search"
@@ -16,12 +15,15 @@
         :headers="headers"
         :items="scores"
         :search="search"
+        :loading="true"
+        v-bind:pagination.sync="pagination"
         class="elevation-1"
         >
-        <template v-slot:items="props">
-            <td class="text-xs-left">{{ props.item.u_id }}</td>
-            <td class="text-xs-left">{{ props.item.score }}</td>
-        </template>
+            <template v-slot:items="props">
+                <td class="text-xs-left">{{ props.item.u_id }}</td>
+                <td class="text-xs-left">{{ props.item.score }}</td>
+                <td class="text-xs-left">{{ props.item.created | createdtoDate }}</td>
+            </template>
         </v-data-table>
     </div>
 
@@ -44,10 +46,19 @@ export default {
                 { 
                     text: 'Score', 
                     value: 'score', 
+                    sortable: false,
+                    align: 'left', 
+                },
+                { 
+                    text: 'Played', 
+                    value: 'created',
+                    sortable: false, 
                     align: 'left', 
                 },
             ],
-            scores: []
+            scores: [],
+            pagination: {'sortBy': 'created', 'descending': true, 'rowsPerPage': -1}
+
         }
     },
 
@@ -70,6 +81,13 @@ export default {
     
     mounted(){
         this.fetchScores()    
+    },
+
+    filters: {
+        createdtoDate(value){
+            var date = new Date(value)
+            return date
+        }
     }
 }
 

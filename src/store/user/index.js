@@ -59,19 +59,6 @@ const actions = {
             console.log(err);
           }
         );
-      },
-
-      async saveScore({commit}, results){
-        await db.collection("quizes").add({
-          u_id: results.u_id, 
-          score: results.score,
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
       }
 }
 
