@@ -1,6 +1,6 @@
 # VueJs Quiz App
 
-Demo: http://arifulislamm.com/vuequiz/#/
+Demo: http://vuequiz.arifulislamm.com
 
 > Features
 1. Firebase Authentication
