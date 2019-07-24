@@ -1,6 +1,14 @@
-# quiz-app
+# VueJs Quiz App
 
-> A Vue.js project
+Demo: http://vuequiz.arifulislamm.com
+
+> Features
+1. Firebase Authentication
+2. Quiz scores are saved to Firestore Cloud
+3. Leaderboard of Quizes
+4. Admin Panel to create quizes
+
+![alt text](https://user-images.githubusercontent.com/24652556/61581840-7ecd7d00-ab45-11e9-8378-399ecc5d1676.png)
 
 ## Build Setup
 
