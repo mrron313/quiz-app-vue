@@ -10,11 +10,21 @@
             ></v-text-field>  
             <v-text-field
                 v-model="password"
+                :type="'password'"
                 label="Password"
                 required
             ></v-text-field>  
             <v-btn @click="submitRegister">Register</v-btn>
             
+            <div class="custom-error">
+                <p v-if="errors.length">
+                    <b>Please correct the following error(s):</b>
+                    <ul>
+                    <li v-for="error in errors" :key="error">{{ error }}</li>
+                    </ul>
+                </p>
+            </div>
+
         </v-layout>   
     </div>
 </template>
@@ -26,6 +36,7 @@ export default {
     name: 'register',
     data() {
         return{
+            errors: [],
             password: '',
             email: ''
         }
@@ -35,7 +46,18 @@ export default {
             resgister: 'resgister'
         }),
 
-        submitRegister(){
+        submitRegister(e){
+            this.errors = [];
+
+            if (!this.email) {
+                this.errors.push('Email required.');
+            }
+            if (!this.password) {
+                this.errors.push('Password required.');
+            }
+
+            e.preventDefault();
+
             this.resgister({
                 email: this.email,
                 password: this.password
@@ -45,6 +67,8 @@ export default {
                     this.$router.replace('/')   
                     location.reload()       
                 }
+            }, error => {
+                this.errors.push(error.message);
             })
         }
     }
@@ -52,5 +76,13 @@ export default {
 </script>
 
 <style scoped>
+
+    .custom-error{
+        margin-top: 10px;
+    }
+
+    .custom-error p{
+        color: red
+    }
 
 </style>
