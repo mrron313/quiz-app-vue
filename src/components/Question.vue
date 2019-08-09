@@ -43,3 +43,15 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+
+.v-card{
+    min-height: 215px;
+}
+
+.v-card__actions{
+    margin-left: 8px
+}
+
+</style>
