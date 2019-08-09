@@ -14,9 +14,11 @@ Vue.use(Vuetify)
 /** Components */
 import Question from '@/components/Question'
 import ScoreDatatable from '@/components/ScoreDatatable'
+import BannerSlider from '@/components/BannerSlider'
 
 Vue.component('question', Question)
 Vue.component('scores-datatable', ScoreDatatable)
+Vue.component('banner-slider', BannerSlider)
 
 Vue.config.productionTip = false
 

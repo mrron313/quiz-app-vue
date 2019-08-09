@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-toolbar app>
-      <v-toolbar-title>Quiz App</v-toolbar-title>
+      <v-toolbar-title ><a href="/">Quiz App</a></v-toolbar-title>
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
@@ -59,5 +59,10 @@ export default {
 </script>
 
 <style>
+
+.v-toolbar__title a{
+  text-decoration: none;
+  color: black
+}
 
 </style>

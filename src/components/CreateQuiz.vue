@@ -5,6 +5,12 @@
         <v-container grid-list-md>
             <v-layout wrap>
 
+                <v-flex v-if="successDb == true" xs12>
+                  <v-alert type="success">
+                    {{ successMsg }}
+                </v-alert>
+                </v-flex>
+
                  <v-flex xs8>
                     <v-card
                         max-width="1020"
@@ -174,7 +180,10 @@ export default {
             type: 'tf',
             answers: '',
             answer: ''
-        }
+        },
+
+        successDb: '',
+        successMsg: 'Quiz is created successfully!'
     }
   },
 
@@ -201,6 +210,8 @@ export default {
                 questions: this.questions,
                 created: Date.now()
             })
+
+            this.successDb = true
         },
 
         addQuestion(){

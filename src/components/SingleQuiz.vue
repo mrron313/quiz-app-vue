@@ -5,7 +5,12 @@
                 <v-layout align-center>
 
                     <v-flex v-if="introStage">
-                        <h3 class="display-3">{{ title }}</h3>
+
+                        <h2>
+                            {{ title }} 
+                            <v-rating readonly v-model="rating"></v-rating>
+                        </h2>
+
                         <span class="subheading">{{ description }}</span>
                         <v-divider class="my-3"></v-divider>  
                         <v-btn class="button" color="info" @click="startQuiz">START!</v-btn>
@@ -67,6 +72,7 @@ export default {
             answers:[],
             correct:0,
             perc:null,
+            rating: 3
         }
     },
   
@@ -147,6 +153,10 @@ export default {
 
 .button{
   margin-left: 0px  
+}
+
+.v-rating{
+    margin-left: -10px;
 }
 
 </style>

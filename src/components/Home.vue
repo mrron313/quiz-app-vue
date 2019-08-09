@@ -1,6 +1,7 @@
 <template>
     <div>
 
+        <banner-slider />
         <v-container grid-list-md text-center>
             <v-layout wrap>
                 <bar-loader 
