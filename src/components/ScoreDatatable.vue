@@ -13,7 +13,7 @@
 
         <v-data-table
         :headers="headers"
-        :items="scores"
+        :items="singleQuizScores"
         :search="search"
         :loading="true"
         v-bind:pagination.sync="pagination"
@@ -64,10 +64,13 @@ export default {
                 },
             ],
             scores: [],
+            singleQuizScores: [],
             pagination: {'sortBy': 'created', 'descending': true, 'rowsPerPage': -1}
 
         }
     },
+
+	props:['quizId'],
 
     methods:{
         ...mapActions('quiz', {
@@ -79,6 +82,15 @@ export default {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
                         this.scores = this.$store.state.quiz.quizScores
+
+                        for (var i=0; i<this.scores.length; i++) {
+                            if (this.scores[i].quiz_id == this.quizId) {
+                                this.singleQuizScores.push( this.scores[i] );
+                            }
+                        }
+
+                        console.log(this.singleQuizScores)
+
                         resolve()
                     }, 1000)
                 })

@@ -6,7 +6,7 @@
 
                     <v-flex v-if="introStage">
                         <h3 class="display-3">{{ title }}</h3>
-                        <span class="subheading">Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
+                        <span class="subheading">{{ description }}</span>
                         <v-divider class="my-3"></v-divider>  
                         <v-btn class="button" color="info" @click="startQuiz">START!</v-btn>
                     </v-flex>
@@ -38,7 +38,7 @@
                 </v-flex>
 
                 <v-flex v-if="introStage">
-                    <scores-datatable />
+                    <scores-datatable :quizId="quizId" />
                 </v-flex>
 
             </v-layout>
@@ -61,6 +61,7 @@ export default {
             allQuizes: [],
             singleQuizDetails: {},
             title:'',
+            description: '',
             questions:[],
             currentQuestion:0,
             answers:[],
@@ -80,7 +81,7 @@ export default {
         }),
 
         getSingleQuiz(){
-            this.quizId = this.$route.params.id
+            this.quizId = this.$route.params.id,
             this.allQuizes = this.$store.state.quiz.allQuizes
 
             for (var i=0; i<this.allQuizes.length; i++) {
@@ -90,6 +91,7 @@ export default {
             }
 
             this.title = this.singleQuizDetails.title
+            this.description = this.singleQuizDetails.description
             this.questions = this.singleQuizDetails.questions
             this.introStage = true;
         },
@@ -119,7 +121,9 @@ export default {
             });
             this.perc = ((this.correct / this.questions.length)*100).toFixed(2);
             
+            console.log(this.$route.params.id)
             this.saveScore({
+                quiz_id: this.$route.params.id,
                 u_id: this.$store.state.user.user.u_id,
                 u_email: this.$store.state.user.user.u_email,
                 score: this.correct

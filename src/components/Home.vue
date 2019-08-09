@@ -24,7 +24,7 @@
                             </v-card-title>
 
                             <v-card-text> 
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. 
+                                <p>{{ quiz.description }}</p>
                             </v-card-text>
                             <v-card-actions class="justify-center">
                                 <v-btn flat :to="{ name: 'single-quiz', params: { id: quiz.id } }" class="btn-primary">See Details</v-btn>
@@ -41,7 +41,6 @@
 <script>
 
 import {mapActions} from 'vuex'
-import { PacmanLoader } from '@saeris/vue-spinners'
 
 export default {
 

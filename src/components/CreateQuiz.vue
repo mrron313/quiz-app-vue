@@ -21,8 +21,14 @@
                                 label="Quiz Title"
                                 required
                             ></v-text-field>
+                            
+                            <v-textarea
+                                v-model="quizDescription"
+                                label="Description"
+                                hint="Write something about quiz"
+                            ></v-textarea>
 
-                            <v-btn @click="addNewQuestion = true">Add New Question</v-btn>
+                            <v-btn @click="addNewQuestion = true">Add Question</v-btn>
 
                             <v-select
                                 v-if="addNewQuestion == true" v-model="selectedQuestionType"
@@ -155,7 +161,11 @@ export default {
 
         newQuestionAdded: false,
 
+        quizId: 0,
+
         quizTitle: '',
+
+        quizDescription: '',
 
         questions: [],
 
@@ -166,6 +176,12 @@ export default {
             answer: ''
         }
     }
+  },
+
+  mounted(){
+      this.quizId = this.$store.state.quiz.allQuizes.length
+
+      console.log(this.quizId)
   },
 
   watch: {
@@ -179,7 +195,9 @@ export default {
 
             await db.collection("quizes").add({
 
+                id: ++this.quizId,
                 title: this.quizTitle,
+                description: this.quizDescription,
                 questions: this.questions,
                 created: Date.now()
             })

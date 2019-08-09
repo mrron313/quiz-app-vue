@@ -46,6 +46,7 @@ const actions = {
     async saveScore({commit}, results){
         console.log(results)
         await db.collection("scores").add({
+          quiz_id: results.quiz_id,
           u_id: results.u_id, 
           u_email: results.u_email, 
           score: results.score,
