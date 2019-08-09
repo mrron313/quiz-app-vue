@@ -9,7 +9,7 @@ import quiz from '@/store/quiz'
 
 const store = new Vuex.Store({
     state: {
-        awesome: true
+        
     },
 
     modules: {

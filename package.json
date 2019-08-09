@@ -1,7 +1,7 @@
 {
-  "name": "Ron-Quiz App",
+  "name": "quiz-app",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Vue.js + Firebase project",
   "author": "Arif-Ul-Islam <arifulislam@bs-23.net>",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "@firebase/app": "^0.4.10",
     "@firebase/auth": "^0.11.4",
     "@firebase/firestore": "^1.4.4",
+    "@saeris/vue-spinners": "^1.0.8",
     "firebase": "^6.3.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

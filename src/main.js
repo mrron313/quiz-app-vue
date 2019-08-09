@@ -20,6 +20,10 @@ Vue.component('scores-datatable', ScoreDatatable)
 
 Vue.config.productionTip = false
 
+// Loading Spinner
+import { VueSpinners } from '@saeris/vue-spinners'
+Vue.use(VueSpinners)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

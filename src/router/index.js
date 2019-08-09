@@ -5,11 +5,14 @@ import Home from '@/components/Home'
 import About from '@/components/About'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import CreateQuiz from '@/components/CreateQuiz'
+import SingleQuiz from '@/components/SingleQuiz'
 import store from '@/store'
 
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -29,13 +32,29 @@ const router = new Router({
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       component: Login
     },
     {
       path: '/register',
-      name: 'Register',
+      name: 'register',
       component: Register
+    },
+    {
+      path: '/create-quiz',
+      name: 'create-quiz',
+      component: CreateQuiz,
+      meta: {
+        requiresAuth: true
+      }  
+    },
+    {
+      path: '/quiz/:id',
+      name: 'single-quiz',
+      component: SingleQuiz,
+      meta: {
+        requiresAuth: true
+      }  
     }
   ],
 })

@@ -1,123 +1,80 @@
 <template>
     <div>
-        <v-responsive v-if="introStage">
-            <v-container fill-height>
-                <v-layout align-center>
 
-                    <v-flex v-if="introStage">
-                        <h3 class="display-3">{{ title }}</h3>
-                        <span class="subheading">Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
-                        <v-divider class="my-3"></v-divider>  
-                        <v-btn class="button" color="info" @click="startQuiz">START!</v-btn>
-                    </v-flex>
+        <v-container grid-list-md text-center>
+            <v-layout wrap>
+                <bar-loader 
+                    class="custom-class" 
+                    :color="spinnerColor" 
+                    v-if="loading == false" 
+                    :size="size" 
+                    :sizeUnit="sizeUnit">
+                </bar-loader>
+                
+                <v-flex v-for="quiz in quizData" :key="quiz.title" xs3>
+                    <v-hover v-slot:default="{ hover }">
+                        <v-card
+                            :elevation="hover ? 12 : 2"
+                            class="mx-auto"
+                            max-width="350"
+                            dark
+                        >
+                            <v-card-title> 
+                                <h3>{{ quiz.title }}</h3>
+                            </v-card-title>
 
-                </v-layout>
-            </v-container>
-        </v-responsive>
-
-        <v-container>
-            <v-layout align-center>
-
-                <v-flex v-if="questionStage">
-                    <question 
-                        :question="questions[currentQuestion]"
-                        v-on:answer="handleAnswer"
-                        :question-number="currentQuestion+1"
-                    ></question>
+                            <v-card-text> 
+                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. 
+                            </v-card-text>
+                            <v-card-actions class="justify-center">
+                                <v-btn flat :to="{ name: 'single-quiz', params: { id: quiz.id } }" class="btn-primary">See Details</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-hover>
                 </v-flex>
-
-                <v-flex v-if="resultsStage">
-                    <v-alert
-                        type="success"
-                        :value="true"
-                    >
-                        You got {{correct}} right out of {{questions.length}} questions. Your percentage is {{perc}}%.
-                    </v-alert>
-
-                    <v-btn class="button" color="primary" @click="pageRefresh">Back to home</v-btn>
-                </v-flex>
-
-                <v-flex v-if="introStage">
-                    <scores-datatable />
-                </v-flex>
-
             </v-layout>
         </v-container>
+
     </div>
 </template>
 
 <script>
 
 import {mapActions} from 'vuex'
-const quizData = 'https://api.myjson.com/bins/vxe9l';
+import { PacmanLoader } from '@saeris/vue-spinners'
 
 export default {
 
     data() {
         return {
-            introStage:false,
-            questionStage:false,
-            resultsStage:false,
-            title:'',
-            questions:[],
-            currentQuestion:0,
-            answers:[],
-            correct:0,
-            perc:null,
+            quizData: [],
+            loading: false,
+            spinnerColor: '#bada55',
+            sizeUnit: 'px',
+            size: 130
         }
     },
   
     created() {
-        fetch(quizData)
-            .then(res => res.json())
-            .then(res => {
-                this.title = res.title;
-                this.questions = res.questions;
-                this.introStage = true;
-            })
-
+        this.fetchQuizFromState()
     },
 
     methods:{
         ...mapActions('quiz', {
-            saveScore: 'saveScore'
+            fetchAllQuizes: 'fetchAllQuizes'
         }),
 
-        startQuiz() {
-            this.introStage = false;
-            this.questionStage = true;
-            console.log('test'+JSON.stringify(this.questions[this.currentQuestion]));
-        },
-
-        handleAnswer(e) {           
-            console.log('answer event ftw',e);
-            this.answers[this.currentQuestion]=e.answer;
-            if((this.currentQuestion+1) === this.questions.length) {
-                this.handleResults();
-                this.questionStage = false;
-                this.resultsStage = true;
-            } else {
-                this.currentQuestion++;
-            }                       
-        },
-
-        handleResults() {
-            console.log('handle results');
-            this.questions.forEach((a, index) => {
-                if(this.answers[index] === a.answer) this.correct++;        
-            });
-            this.perc = ((this.correct / this.questions.length)*100).toFixed(2);
+        fetchQuizFromState() {
             
-            this.saveScore({
-                u_id: this.$store.state.user.user.u_id,
-                u_email: this.$store.state.user.user.u_email,
-                score: this.correct
+            this.fetchAllQuizes().then(response => {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        this.quizData = this.$store.state.quiz.allQuizes
+                        this.loading = true
+                        resolve()
+                    }, 1000)
+                })
             })
-            .then(response => {
-                console.log('saved to db')
-            })
-
-            console.log(this.correct+' '+this.perc);
         },
 
         pageRefresh(){
@@ -132,6 +89,10 @@ export default {
 
 .button{
   margin-left: 0px  
+}
+
+.v-card__actions{
+    padding-bottom: 10px
 }
 
 </style>

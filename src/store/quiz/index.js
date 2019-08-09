@@ -2,6 +2,7 @@ import firebase from '@/firebase'
 import db from '@/db'
 
 const state = {
+    allQuizes: {},
     quizScores: {}
 }
 
@@ -10,13 +11,29 @@ const getters = {
 }
 
 const mutations = {
+    
+    async fetchAllQuizes(state){
+        const snapshot = await firebase.firestore().collection('quizes').get()
+        state.allQuizes = snapshot.docs.map(doc => doc.data())
+    },
+
     async fetchQuizScores(state){
         const snapshot = await firebase.firestore().collection('scores').get()
         state.quizScores = snapshot.docs.map(doc => doc.data())
     }
+
 }
 
 const actions = {
+    async fetchAllQuizes({commit}) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              commit('fetchAllQuizes')
+              resolve()
+            }, 2000)
+        })        
+    },
+
     async fetchAllScores({commit}) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -35,7 +52,7 @@ const actions = {
           created: Date.now()
         })
         .then(function() {
-            console.log("Document successfully written!");
+            console.log("Score Saved!");
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);
